@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
-// mysqli
-$mysqli = new mysqli("localhost", "root", "", "printer_manage");
+include_once "lib/lib.php";
+
 ?>
 
 
