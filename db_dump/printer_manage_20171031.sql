@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017 年 10 朁E31 日 08:22
+-- Generation Time: 2017 年 11 朁E01 日 07:44
 -- サーバのバージョン： 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -60,6 +60,7 @@ INSERT INTO `print_historys` (`id`, `student_id`, `first_name`, `last_name`, `ro
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
+  `login_key` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -70,9 +71,9 @@ CREATE TABLE `students` (
 -- テーブルのデータのダンプ `students`
 --
 
-INSERT INTO `students` (`id`, `password`, `first_name`, `last_name`, `class_name`) VALUES
-(1000, '1111', 'keisuke', 'minami', '4/1'),
-(1001, '1111', 'aaa', 'bbb', '4/4');
+INSERT INTO `students` (`id`, `login_key`, `password`, `first_name`, `last_name`, `class_name`) VALUES
+(1000, 'root', 'aaaaaaaa', 'keisuke', 'minami', '4/1'),
+(1001, 'aaa', 'bbb', 'aaa', 'bbb', '4/4');
 
 --
 -- Indexes for dumped tables

@@ -82,8 +82,9 @@ if ($result = $mysqli->query($query)) {
   </table>
 </div>
 
+<!--
 <button type="button" class="btn btn-default">Button</button>
-
+-->
 
 <style>
 /* Grow */
@@ -104,7 +105,7 @@ if ($result = $mysqli->query($query)) {
     transform: scale(1.1);
 }
 </style>
-<a href="#" class="hvr-grow">TEST LINK</a>
+<a href="register.php" class="hvr-grow">Register</a>
 
   </main>
 

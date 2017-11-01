@@ -26,11 +26,13 @@
         <input type="text" id="input_id" name="input_id" class="form-control" placeholder="Email address" required autofocus>
         <label for="input_password" class="sr-only">Password</label>
         <input type="password" id="input_password" name="input_password" class="form-control" placeholder="Password" required>
+<!--
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="rememberme" value="remember-me"> Remember me
+            <input type="checkbox" name="remember_me" value="remember-me"> Remember me
           </label>
         </div>
+-->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
