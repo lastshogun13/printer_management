@@ -1,6 +1,6 @@
 <?php
 // mysqli
-$mysqli = new mysqli("localhost", "root", "aaaaaaaa", "printer_manage");
+$mysqli = new mysqli("localhost", "root", "12345678", "printer_manage");
 
 
 
@@ -20,6 +20,14 @@ function check_login($mysqli, $input_id, $input_pw){
 		return false;
 	}
 	return true;
+}
+
+
+function check_admin_login($mysqli, $input_id, $input_pw){
+	if($input_id == 'admin' && $input_pw == 'admin'){
+		return true;
+	}
+	return false;
 }
 
 
