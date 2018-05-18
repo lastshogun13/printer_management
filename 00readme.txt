@@ -2,11 +2,13 @@ Start from xampp(ArrServ)
 
 
 start URL
-http://localhost/printer_management/
+http://localhost/printer_management/admin_login.php
+http://localhost/printer_management/login.php
 
 DB management
 http://localhost/phpmyadmin/
 
 
 
-C:\xampp\htdocs\printer_management
+C:\AppServ\www\printer_management
+

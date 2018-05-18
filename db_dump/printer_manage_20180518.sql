@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 2017 年 11 朁E01 日 07:44
--- サーバのバージョン： 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Host: localhost
+-- Generation Time: May 18, 2018 at 09:15 AM
+-- Server version: 5.7.17-log
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `print_historys`
+-- Table structure for table `print_historys`
 --
 
 CREATE TABLE `print_historys` (
@@ -41,7 +39,7 @@ CREATE TABLE `print_historys` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- テーブルのデータのダンプ `print_historys`
+-- Dumping data for table `print_historys`
 --
 
 INSERT INTO `print_historys` (`id`, `student_id`, `first_name`, `last_name`, `room_name`, `page_count`, `is_paid`, `created_at`, `updated_at`) VALUES
@@ -55,7 +53,7 @@ INSERT INTO `print_historys` (`id`, `student_id`, `first_name`, `last_name`, `ro
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -68,7 +66,7 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Stident Management Table';
 
 --
--- テーブルのデータのダンプ `students`
+-- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `login_key`, `password`, `first_name`, `last_name`, `class_name`) VALUES
@@ -86,6 +84,12 @@ ALTER TABLE `print_historys`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -93,8 +97,7 @@ ALTER TABLE `print_historys`
 -- AUTO_INCREMENT for table `print_historys`
 --
 ALTER TABLE `print_historys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;COMMIT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
