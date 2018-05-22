@@ -9,7 +9,7 @@ $input_pw    = $_POST['input_password'];
 #echo($input_pw);
 #echo($remember_me);
 
-$is_success = check_admin_login($mysqli, $input_id, $input_pw);
+$is_success = check_login($mysqli, $input_id, $input_pw);
 
 if(!$is_success){
 	echo("Login failed.\n");

@@ -12,7 +12,7 @@ include_once "lib/lib.php";
 
     <link rel="stylesheet" href="css/drawer.min.css">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
   </head>
 
@@ -37,12 +37,15 @@ include_once "lib/lib.php";
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>login_key</th>
-        <th>password</th>
         <th>first_name</th>
         <th>last_name</th>
         <th>class_name</th>
+        <th>number</th>
+        <th>sex</th>
+        <th>birthday</th>
+        <th>blood_type</th>
+        <th>weight</th>
+        <th>height</th>
       </tr>
     </thead>
     <tbody>
@@ -54,14 +57,17 @@ if ($result = $mysqli->query($query)) {
 	/* 連想配列を取得します */
 	while ($row = $result->fetch_assoc()) {
 ?>
-
       <tr>
-        <td><?php echo($row["id"]); ?></td>
-        <td><?php echo($row["login_key"]); ?></td>
-        <td><?php echo($row["password"]); ?></td>
         <td><?php echo($row["first_name"]); ?></td>
         <td><?php echo($row["last_name"]); ?></td>
         <td><?php echo($row["class_name"]); ?></td>
+        <td><?php echo($row["student_number"]); ?></td>
+        <td><?php if($row["sex"] == 1) { echo('male'); } else { echo('female'); } ?></td>
+        <td><?php echo($row["birthday"]); ?></td>
+        <td><?php echo($row["blood_type"]); ?></td>
+        <td><?php echo($row["weight"]); ?></td>
+        <td><?php echo($row["height"]); ?></td>
+
         <td><a href="admin_user_delete.php?id=<?php echo($row["id"]); ?>">delete</a></td>
       </tr>
 

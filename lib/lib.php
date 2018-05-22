@@ -1,12 +1,12 @@
 <?php
 // mysqli
-$mysqli = new mysqli("localhost", "root", "12345678", "printer_manage");
+$mysqli = new mysqli("localhost", "root", "12345678", "medical_office_management");
 
 
 
 function check_login($mysqli, $input_id, $input_pw){
 	// mysqli
-	$query = "SELECT * FROM students WHERE login_key = '{$input_id}'";
+	$query = "SELECT * FROM nurses WHERE login_key = '{$input_id}'";
 	#echo($query);
 
 	if ($result = $mysqli->query($query)) {

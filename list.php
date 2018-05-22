@@ -55,7 +55,7 @@ include_once "lib/lib.php";
 
 <?php
 // mysqli
-$query = "SELECT * FROM print_historys";
+$query = "SELECT * FROM illness_historys";
 if ($result = $mysqli->query($query)) {
 	/* 連想配列を取得します */
 	while ($row = $result->fetch_assoc()) {

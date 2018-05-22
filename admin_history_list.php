@@ -12,7 +12,7 @@ include_once "lib/lib.php";
 
     <link rel="stylesheet" href="css/drawer.min.css">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
   </head>
 
@@ -34,39 +34,79 @@ include_once "lib/lib.php";
 
 <div class="container">
 
+	<a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
+
   <table class="table table-striped">
     <thead>
       <tr>
         <th>#</th>
-        <th>date</th>
-        <th>student_id</th>
-        <th>first_name</th>
-        <th>last_name</th>
-        <th>room_name</th>
-        <th>page_count</th>
-        <th>is_paid</th>
+        <th>datetime_come_in</th>
+        <th>datetime_go_out</th>
+        <th>student_name</th>
+        <th>nurse_name</th>
+        <th>illness_name</th>
+        <th>medicine</th>
+        <th>is_sent_message</th>
       </tr>
     </thead>
     <tbody>
 
 <?php
+$query = <<< EOM
+SELECT * FROM teachers ORDER BY id
+EOM;
+
+$teachers = array();
+if ($result = $mysqli->query($query)) {
+	/* 連想配列を取得します */
+	while ($row = $result->fetch_assoc()) {
+		$teachers[$row["id"]] = $row["first_name"] . " " . $row["last_name"];
+	}
+}
+
+
+
 // mysqli
-$query = "SELECT * FROM print_historys";
+#$query = "SELECT * FROM illness_historys";
+#$query = "SELECT ih.id, ih.datetime_come_in, ih.datetime_go_out, ih.illness_name, ih.medicine, ih.is_sent_message, s.first_name, s.last_name FROM illness_historys AS ih LEFT OUTER JOIN students AS s ON ih.student_id = s.id ORDER BY ih.id LEFT OUTER JOIN students AS s ON ih.student_id = s.id ORDER BY ih.id";
+
+$query = <<< EOM
+SELECT ih.id, ih.datetime_come_in, ih.datetime_go_out, ih.illness_name, ih.medicine, ih.is_sent_message, 
+       s.id AS s_id, s.class_name AS s_class_room, s.student_number AS s_number, s.first_name, s.last_name,
+       n.id AS n_id, n.first_name AS nf_name, n.last_name AS nl_name
+  FROM illness_historys AS ih 
+  LEFT OUTER JOIN students AS s ON ih.student_id = s.id
+  LEFT OUTER JOIN nurses AS n ON ih.nurse_id = n.id
+ ORDER BY ih.created_at DESC, ih.id
+EOM;
+
+
 if ($result = $mysqli->query($query)) {
 	/* 連想配列を取得します */
 	while ($row = $result->fetch_assoc()) {
 ?>
 
       <tr>
-        <td><?php echo($row["student_id"]); ?></td>
-        <td><?php echo($row["created_at"]); ?></td>
-        <td><?php echo($row["student_id"]); ?></td>
-        <td><?php echo($row["first_name"]); ?></td>
-        <td><?php echo($row["last_name"]); ?></td>
-        <td><?php echo($row["room_name"]); ?></td>
-        <td><?php echo($row["page_count"]); ?></td>
-        <td><?php if($row["is_paid"] == 1){ echo("paid"); }else{ echo("not yet"); } ?></td>
-        <td><a href="admin_history_paid_change.php?id=<?php echo($row["id"]); ?>">change</a></td>
+        <td><?php echo($row["id"]); ?></td>
+        <td><?php echo($row["datetime_come_in"]); ?></td>
+        <td><?php echo($row["datetime_go_out"]); ?></td>
+        <td><?php echo($row["first_name"]); ?> <?php echo($row["last_name"]); ?> (<?php echo($row["s_class_room"]); ?> <?php echo($row["s_number"]); ?>)</td>
+        <td><?php echo($row["nf_name"]); ?> <?php echo($row["nl_name"]); ?> (<?php echo($row["n_id"]); ?>)</td>
+        <td><?php echo($row["illness_name"]); ?></td>
+        <td><?php echo($row["medicine"]); ?></td>
+        <td><?php if($row["is_sent_message"] == 1){ echo("sent"); }else{ echo("not yet"); } ?></td>
+        <td>
+        <form action="admin_history_paid_change.php" method="GET">
+          <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
+          <select name="teacher_id">
+<?php
+foreach ($teachers as $tid => $tname){
+  print '<option value="'.$tid.'">'.$tname.' ('.$tid.')</option>';
+}
+?>
+          </select>
+          <input type="submit" value="send">
+        </form>
       </tr>
 
 <?php
@@ -79,6 +119,8 @@ if ($result = $mysqli->query($query)) {
     </tbody>
   </table>
 </div>
+
+<!--<?php print_r($teachers)  ?>-->
 
   </main>
 

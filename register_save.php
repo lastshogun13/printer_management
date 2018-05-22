@@ -10,7 +10,7 @@ $page_count = $_POST['page_count'];
 $datetime   = $_POST['datetime'];
 
 
-$query = "INSERT INTO `print_historys`(`student_id`, `first_name`, `last_name`, `room_name`, `page_count`, `is_paid`, `created_at`, `updated_at`) VALUES ('" . $student_id . "','" . $first_name . "','" . $last_name . "','" . $room_name . "'," . $page_count . ",0,'" . $datetime . "', CURRENT_TIMESTAMP)";
+$query = "INSERT INTO `illness_historys`(`student_id`, `first_name`, `last_name`, `room_name`, `page_count`, `is_paid`, `created_at`, `updated_at`) VALUES ('" . $student_id . "','" . $first_name . "','" . $last_name . "','" . $room_name . "'," . $page_count . ",0,'" . $datetime . "', CURRENT_TIMESTAMP)";
 #echo($query);
 
 if ($mysqli->query($query) !== TRUE) {
