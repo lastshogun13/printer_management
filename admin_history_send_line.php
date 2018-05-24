@@ -29,7 +29,7 @@ if ($result = $mysqli->query($query)) {
 		$line_text = $student_name . ' is not illness.';
 	} else {
 		$new_is_sent_message = 1;
-		$line_text = $student_name . ' is illness.';
+		$line_text = $student_name . ' is staying in medical office.';
 	}
 } else {
 	$new_is_sent_message = 0;

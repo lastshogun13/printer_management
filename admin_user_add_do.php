@@ -2,12 +2,17 @@
 include_once "lib/lib.php";
 
 
-$id            = $_POST['id'];
-$login_key     = $_POST['login_key'];
-$password      = $_POST['password'];
-$first_name    = $_POST['first_name'];
-$last_name     = $_POST['last_name'];
-$class_name    = $_POST['class_name'];
+$id             = $_POST['id'];
+$first_name     = $_POST['first_name'];
+$last_name      = $_POST['last_name'];
+$class_name     = $_POST['class_name'];
+$student_number = $_POST['student_number'];
+$sex            = $_POST['sex'];
+$birthday       = $_POST['birthday'];
+$blood_type     = $_POST['blood_type'];
+$height         = $_POST['height'];
+$weight         = $_POST['weight'];
+
 
 #print $id;
 #exit;
@@ -16,20 +21,28 @@ $class_name    = $_POST['class_name'];
 $query = "
 INSERT INTO students (
   id,
-  login_key,
-  password,
   first_name,
   last_name,
-  class_name
+  class_name,
+  student_number,
+  sex,
+  birthday,
+  blood_type,
+  height,
+  weight
 )
 VALUES
 (
    '$id',
-   '$login_key',
-   '$password',
    '$first_name',
    '$last_name',
-   '$class_name'
+   '$class_name',
+   '$student_number',
+   '$sex',
+   '$birthday',
+   '$blood_type',
+   '$height',
+   '$weight'
 )
 ";
 

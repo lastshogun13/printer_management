@@ -1,57 +1,10 @@
 <?php
 include_once "lib/lib.php";
-?>
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>drawer test</title>
+$student_id     = $_GET['student_id'];
 
-    <link rel="stylesheet" href="css/drawer.min.css">
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-  </head>
-
-<body class="drawer drawer--left">
-  <header role="banner">
-    <button type="button" class="drawer-toggle drawer-hamburger">
-      <span class="sr-only">toggle navigation</span>
-      <span class="drawer-hamburger-icon"></span>
-    </button>
-    <nav class="drawer-nav" role="navigation">
-      <ul class="drawer-menu">
-        <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
-        <li><a class="drawer-brand" href="admin_user_list.php">User</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main role="main">
-    <!-- Page content -->
-
-<div class="container">
-
-	<a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>datetime_come_in</th>
-        <th>datetime_go_out</th>
-        <th>student_name</th>
-        <th>nurse_name</th>
-        <th>illness_name</th>
-        <th>medicine</th>
-        <th>is_sent_message</th>
-      </tr>
-    </thead>
-    <tbody>
-
-<?php
 $query = <<< EOM
 SELECT * FROM teachers ORDER BY id
 EOM;
@@ -65,10 +18,108 @@ if ($result = $mysqli->query($query)) {
 }
 
 
+$query = <<< EOM
+SELECT * FROM students ORDER BY id
+EOM;
+
+$students = array();
+if ($result = $mysqli->query($query)) {
+	/* 連想配列を取得します */
+	while ($row = $result->fetch_assoc()) {
+		$students[$row["id"]] = "( " . $row["class_name"] . " " . $row["student_number"] . " ) " . $row["first_name"] . " " . $row["last_name"];
+	}
+}
+
+
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History List</title>
+
+    <link rel="stylesheet" href="css/drawer.min.css">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+  </head>
+
+<body class="drawer drawer--left">
+  <header role="banner">
+    <button type="button" class="drawer-toggle drawer-hamburger">
+      <span class="sr-only">toggle navigation</span>
+      <span class="drawer-hamburger-icon"></span>
+    </button>
+    <nav class="drawer-nav" role="navigation">
+      <ul class="drawer-menu">
+        <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
+        <li><a class="drawer-brand" href="admin_user_list.php">Student</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main role="main">
+    <!-- Page content -->
+
+<div class="container">
+
+
+  <form action="admin_history_list.php" method="GET">
+    <div class="form-row mx-auto">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Student</label>
+        <select class="custom-select" name="student_id">
+          <option>choose student</option>
+<?php
+foreach ($students as $sid => $sname){
+  if($sid == $student_id){
+    print '<option value="'.$sid.'" selected>'.$sname.'</option>';
+  } else {
+    print '<option value="'.$sid.'">'.$sname.'</option>';
+  }
+}
+?>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2">Filter</button>
+      </div>
+      <div class="col-auto">
+        <a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
+      </div>
+    </div>
+  </form>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>come_in</th>
+        <th>go_out</th>
+        <th>student_name</th>
+        <th>nurse_name</th>
+        <th>illness_name</th>
+        <th>medicine</th>
+        <th>is_sent_message</th>
+      </tr>
+    </thead>
+    <tbody>
+
+<?php
 
 // mysqli
 #$query = "SELECT * FROM illness_historys";
 #$query = "SELECT ih.id, ih.datetime_come_in, ih.datetime_go_out, ih.illness_name, ih.medicine, ih.is_sent_message, s.first_name, s.last_name FROM illness_historys AS ih LEFT OUTER JOIN students AS s ON ih.student_id = s.id ORDER BY ih.id LEFT OUTER JOIN students AS s ON ih.student_id = s.id ORDER BY ih.id";
+
+if($student_id > 0){
+  $where = " WHERE s.id = $student_id";
+} else {
+  $where = "";
+}
+
 
 $query = <<< EOM
 SELECT ih.id, ih.datetime_come_in, ih.datetime_go_out, ih.illness_name, ih.medicine, ih.is_sent_message, 
@@ -77,7 +128,8 @@ SELECT ih.id, ih.datetime_come_in, ih.datetime_go_out, ih.illness_name, ih.medic
   FROM illness_historys AS ih 
   LEFT OUTER JOIN students AS s ON ih.student_id = s.id
   LEFT OUTER JOIN nurses AS n ON ih.nurse_id = n.id
- ORDER BY ih.created_at DESC, ih.id
+$where
+ ORDER BY ih.datetime_come_in DESC, ih.id
 EOM;
 
 
@@ -87,25 +139,29 @@ if ($result = $mysqli->query($query)) {
 ?>
 
       <tr>
-        <td><?php echo($row["id"]); ?></td>
         <td><?php echo($row["datetime_come_in"]); ?></td>
         <td><?php echo($row["datetime_go_out"]); ?></td>
-        <td><?php echo($row["first_name"]); ?> <?php echo($row["last_name"]); ?> (<?php echo($row["s_class_room"]); ?> <?php echo($row["s_number"]); ?>)</td>
-        <td><?php echo($row["nf_name"]); ?> <?php echo($row["nl_name"]); ?> (<?php echo($row["n_id"]); ?>)</td>
+        <td>(<?php echo($row["s_class_room"]); ?>) <?php echo($row["first_name"]); ?> <?php echo($row["last_name"]); ?></td>
+        <td>(<?php echo($row["n_id"]); ?>) <?php echo($row["nf_name"]); ?> <?php echo($row["nl_name"]); ?></td>
         <td><?php echo($row["illness_name"]); ?></td>
         <td><?php echo($row["medicine"]); ?></td>
-        <td><?php if($row["is_sent_message"] == 1){ echo("sent"); }else{ echo("not yet"); } ?></td>
+<!--        <td><?php if($row["is_sent_message"] == 1){ echo("sent"); }else{ echo("not yet"); } ?></td> -->
         <td>
-        <form action="admin_history_paid_change.php" method="GET">
+        <form action="admin_history_send_line.php" method="GET">
           <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
           <select name="teacher_id">
 <?php
 foreach ($teachers as $tid => $tname){
-  print '<option value="'.$tid.'">'.$tname.' ('.$tid.')</option>';
+  print '<option value="'.$tid.'">('.$tid.') '.$tname.'</option>';
 }
 ?>
           </select>
-          <input type="submit" value="send">
+          <input type="submit" value="send"><?php if($row["is_sent_message"] == 1){ echo("sent"); } ?><br/>
+
+        </form>
+        <form action="admin_history_delete.php" method="GET">
+          <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
+          <input type="submit" value="delete">
         </form>
       </tr>
 
@@ -118,6 +174,9 @@ foreach ($teachers as $tid => $tname){
 ?>
     </tbody>
   </table>
+
+  <a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
+
 </div>
 
 <!--<?php print_r($teachers)  ?>-->

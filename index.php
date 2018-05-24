@@ -20,23 +20,34 @@
     <!-- Page content -->
 
 
-      <form class="form-signin" action="admin_login_check.php" method="post">
-        <h2 class="form-signin-heading">Please sign in admin account</h2>
-        <label for="input_id" class="sr-only">ID</label>
-        <input type="text" id="input_id" name="input_id" class="form-control" placeholder="ID" required autofocus>
-        <label for="input_password" class="sr-only">Password</label>
-        <input type="password" id="input_password" name="input_password" class="form-control" placeholder="Password" required>
-<!--
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="remember_me" value="remember-me"> Remember me
-          </label>
+    <div class="container">
+      <div class="section-heading text-center">
+        <h2>Medical Office Management System</h2>
+        <h2>ระบบจัดการห้องพยาบาล</h2>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 my-auto">
+          <div class="justify-content-center">
+            <img src="images/nurse.png" class="img-fluid" alt="">
+          </div>
         </div>
--->
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+        <div class="col-lg-9 my-auto">
+
+          <form class="form-signin" action="admin_login_check.php" method="post">
+            <h2 class="form-signin-heading">Please sign in admin account</h2>
+            <h2 class="form-signin-heading">โปรดล็อคอินเข้าสู่ระบบ</h2>
+            <label for="input_id" class="sr-only">ID</label>
+            <input type="text" id="input_id" name="input_id" class="form-control" placeholder="ID" required autofocus>
+            <label for="input_password" class="sr-only">Password</label>
+            <input type="password" id="input_password" name="input_password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
 
 
+        </div>
+      </div>
+    </div>
 
   </main>
 

@@ -25,7 +25,7 @@ include_once "lib/lib.php";
     <nav class="drawer-nav" role="navigation">
       <ul class="drawer-menu">
         <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
-        <li><a class="drawer-brand" href="admin_user_list.php">User</a></li>
+        <li><a class="drawer-brand" href="admin_user_list.php">Student</a></li>
       </ul>
     </nav>
   </header>
@@ -35,19 +35,60 @@ include_once "lib/lib.php";
 <div class="container">
 
       <form action="admin_user_add_do.php" method="post">
-        <h2 class="form-signin-heading">User add</h2>
-        <label for="basic-url">ID</label>
-        <input type="text" class="form-control" name="id" placeholder="ID">
-        <label for="basic-url">login_key</label>
-        <input type="text" class="form-control" name="login_key" placeholder="login_key">
-        <label for="basic-url">password</label>
-        <input type="text" class="form-control" name="password" placeholder="password">
+        <h2 class="form-signin-heading">Student add</h2>
+
         <label for="basic-url">first_name</label>
         <input type="text" class="form-control" name="first_name" placeholder="first_name">
+
         <label for="basic-url">last_name</label>
         <input type="text" class="form-control" name="last_name" placeholder="last_name">
+
         <label for="basic-url">class_name</label>
         <input type="text" class="form-control" name="class_name" placeholder="class_name">
+
+        <label for="basic-url">student_number</label>
+        <input type="text" class="form-control" name="student_number" placeholder="student_number">
+
+        <label for="basic-url">sex</label>
+        <div class="form-check">
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="sexRadioOptions1" name="sex" value="1">
+            <label class="form-check-label" for="sexRadioOptions1">male</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="sexRadioOptions0" name="sex" value="0">
+            <label class="form-check-label" for="sexRadioOptions0">female</label>
+          </div>
+        </div>
+
+        <label for="basic-url">birthday</label>
+        <input type="date" class="form-control" name="birthday" placeholder="birthday">
+
+        <label for="basic-url">blood_type</label>
+        <div class="form-check">
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="blood_typeRadioOptionsA" name="blood_type" value="A">
+            <label class="form-check-label" for="blood_typeRadioOptionsA">A</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="blood_typeRadioOptionsB" name="blood_type" value="B">
+            <label class="form-check-label" for="blood_typeRadioOptionsB">B</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="blood_typeRadioOptionsO" name="blood_type" value="O">
+            <label class="form-check-label" for="blood_typeRadioOptionsO">O</label>
+          </div>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="radio" id="blood_typeRadioOptionsAB" name="blood_type" value="AB">
+            <label class="form-check-label" for="blood_typeRadioOptionsAB">AB</label>
+          </div>
+        </div>
+
+        <label for="basic-url">height</label>
+        <input type="text" class="form-control" name="height" placeholder="height">
+
+        <label for="basic-url">weight</label>
+        <input type="text" class="form-control" name="weight" placeholder="weight">
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
       </form>

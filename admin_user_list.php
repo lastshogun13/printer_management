@@ -25,14 +25,17 @@ include_once "lib/lib.php";
     <nav class="drawer-nav" role="navigation">
       <ul class="drawer-menu">
         <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
-        <li><a class="drawer-brand" href="admin_user_list.php">User</a></li>
+        <li><a class="drawer-brand" href="admin_user_list.php">Student</a></li>
       </ul>
     </nav>
   </header>
   <main role="main">
     <!-- Page content -->
 
+
 <div class="container">
+
+  <a class="btn btn-primary" href="admin_user_add.php" role="button">Student Add</a>
 
   <table class="table table-striped">
     <thead>
@@ -81,7 +84,7 @@ if ($result = $mysqli->query($query)) {
     </tbody>
   </table>
 
-<a href="admin_user_add.php">add</a></td>
+  <a class="btn btn-primary" href="admin_user_add.php" role="button">Student Add</a>
 
 </div>
 

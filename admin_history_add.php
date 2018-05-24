@@ -56,7 +56,7 @@ if ($result = $mysqli->query($query)) {
     <nav class="drawer-nav" role="navigation">
       <ul class="drawer-menu">
         <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
-        <li><a class="drawer-brand" href="admin_user_list.php">User</a></li>
+        <li><a class="drawer-brand" href="admin_user_list.php">Student</a></li>
       </ul>
     </nav>
   </header>
@@ -84,9 +84,9 @@ foreach ($nurses as $id => $name){
 ?>
         </select>
         <label for="basic-url">datetime_come_in</label>
-        <input type="datetime-local" class="form-control" name="datetime_come_in" min="1000-01-01" max="3000-12-31">
+        <input type="datetime-local" class="form-control" name="datetime_come_in" min="1000-01-01" max="3000-12-31" value="<?php date_default_timezone_set('GMT');echo(strftime('%Y-%m-%dT%H:%M:%S')); ?>">
         <label for="basic-url">datetime_go_out</label>
-        <input type="datetime-local" class="form-control" name="datetime_go_out" min="1000-01-01" max="3000-12-31">
+        <input type="datetime-local" class="form-control" name="datetime_go_out" min="1000-01-01" max="3000-12-31" value="<?php date_default_timezone_set('GMT');echo(strftime('%Y-%m-%dT%H:%M:%S')); ?>">
         <label for="basic-url">illness_name</label>
         <input type="text" class="form-control" name="illness_name" placeholder="illness_name">
         <label for="basic-url">medicine</label>
