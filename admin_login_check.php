@@ -16,7 +16,7 @@ if(!$is_success){
 	exit;
 }
 
-$url = '/printer_management/admin_history_list.php';
+$url = '/printer_management/admin_user_list.php';
 header("Location: {$url}");
 exit;
 ?>

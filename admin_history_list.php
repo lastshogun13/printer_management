@@ -41,38 +41,49 @@ if ($result = $mysqli->query($query)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>History List</title>
 
-    <link rel="stylesheet" href="css/drawer.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="css/main.css">
 
   </head>
 
-<body class="drawer drawer--left">
-  <header role="banner">
-    <button type="button" class="drawer-toggle drawer-hamburger">
-      <span class="sr-only">toggle navigation</span>
-      <span class="drawer-hamburger-icon"></span>
-    </button>
-    <nav class="drawer-nav" role="navigation">
-      <ul class="drawer-menu">
-        <li><a class="drawer-brand" href="admin_history_list.php">History</a></li>
-        <li><a class="drawer-brand" href="admin_user_list.php">Student</a></li>
-      </ul>
-    </nav>
+<body>
+  <!-- Start Header Area -->
+  <header class="default-header">
+    <div class="container">
+      <div class="header-wrap">
+        <div class="header-top d-flex justify-content-between align-items-center">
+          <div class="logo">
+            <a href="."><img src="images/logo.png" alt=""></a>
+          </div>
+          <div class="main-menubar d-flex align-items-center">
+            <nav>
+              <a href="admin_user_list.php" >Student</a>
+              <a href="admin_history_list.php" >History</a>
+              <a href="index.php" class="logout">Logout</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
-  <main role="main">
+  <!-- End Header Area -->
+
+  <main role="main" style="padding-top: 90px;">
     <!-- Page content -->
 
-<div class="container">
+    <div class="container">
 
-
-  <form action="admin_history_list.php" method="GET">
-    <div class="form-row mx-auto">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInput">Student</label>
-        <select class="custom-select" name="student_id">
-          <option>choose student</option>
+      <form action="admin_history_list.php" method="GET">
+        <div class="form-row mx-auto">
+          <div class="col-3">
+            <label class="sr-only" for="inlineFormInput">Student</label>
+            <select class="custom-select" name="student_id" id="select_student_id">
+              <option>choose student</option>
 <?php
 foreach ($students as $sid => $sname){
   if($sid == $student_id){
@@ -82,31 +93,30 @@ foreach ($students as $sid => $sname){
   }
 }
 ?>
-        </select>
-      </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-2">Filter</button>
-      </div>
-      <div class="col-auto">
-        <a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
-      </div>
-    </div>
-  </form>
+            </select>
+          </div>
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary mb-2">Filter</button>
+          </div>
+          <div class="col-7">
+            <a href="admin_history_add.php?student_id=<?php echo $student_id; ?>" role="button" class="nw-btn primary-btn">Add History<span class="lnr lnr-arrow-right"></span></a>
+          </div>
+        </div>
+      </form>
 
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>come_in</th>
-        <th>go_out</th>
-        <th>student_name</th>
-        <th>nurse_name</th>
-        <th>illness_name</th>
-        <th>medicine</th>
-        <th>is_sent_message</th>
-      </tr>
-    </thead>
-    <tbody>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>come_in</th>
+            <th>go_out</th>
+            <th>student_name</th>
+            <th>nurse_name</th>
+            <th>illness_name</th>
+            <th>medicine</th>
+            <th>is_sent_message</th>
+          </tr>
+        </thead>
+        <tbody>
 
 <?php
 
@@ -138,32 +148,33 @@ if ($result = $mysqli->query($query)) {
 	while ($row = $result->fetch_assoc()) {
 ?>
 
-      <tr>
-        <td><?php echo($row["datetime_come_in"]); ?></td>
-        <td><?php echo($row["datetime_go_out"]); ?></td>
-        <td>(<?php echo($row["s_class_room"]); ?>) <?php echo($row["first_name"]); ?> <?php echo($row["last_name"]); ?></td>
-        <td>(<?php echo($row["n_id"]); ?>) <?php echo($row["nf_name"]); ?> <?php echo($row["nl_name"]); ?></td>
-        <td><?php echo($row["illness_name"]); ?></td>
-        <td><?php echo($row["medicine"]); ?></td>
-<!--        <td><?php if($row["is_sent_message"] == 1){ echo("sent"); }else{ echo("not yet"); } ?></td> -->
-        <td>
-        <form action="admin_history_send_line.php" method="GET">
-          <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
-          <select name="teacher_id">
+          <tr>
+            <td><?php echo($row["datetime_come_in"]); ?></td>
+            <td><?php echo($row["datetime_go_out"]); ?></td>
+            <td>(<?php echo($row["s_class_room"]); ?>) <?php echo($row["first_name"]); ?> <?php echo($row["last_name"]); ?></td>
+            <td>(<?php echo($row["n_id"]); ?>) <?php echo($row["nf_name"]); ?> <?php echo($row["nl_name"]); ?></td>
+            <td><?php echo($row["illness_name"]); ?></td>
+            <td><?php echo($row["medicine"]); ?></td>
+    <!--        <td><?php if($row["is_sent_message"] == 1){ echo("sent"); }else{ echo("not yet"); } ?></td> -->
+            <td>
+            <form action="admin_history_send_line.php" method="GET">
+              <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
+              <select name="teacher_id">
 <?php
 foreach ($teachers as $tid => $tname){
   print '<option value="'.$tid.'">('.$tid.') '.$tname.'</option>';
 }
 ?>
-          </select>
-          <input type="submit" value="send"><?php if($row["is_sent_message"] == 1){ echo("sent"); } ?><br/>
+              </select>
+              <input type="submit" value="send"><?php if($row["is_sent_message"] == 1){ echo("sent"); } ?><br/>
 
-        </form>
-        <form action="admin_history_delete.php" method="GET">
-          <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
-          <input type="submit" value="delete">
-        </form>
-      </tr>
+            </form>
+            <form action="admin_history_delete.php" method="GET">
+              <input type="hidden" name="id" value="<?php echo($row["id"]); ?>">
+              <input type="hidden" name="student_id" value="<?php echo($student_id); ?>">
+              <input type="submit" value="delete">
+            </form>
+          </tr>
 
 <?php
 	}
@@ -172,12 +183,20 @@ foreach ($teachers as $tid => $tname){
 	$result->close();
 }
 ?>
-    </tbody>
-  </table>
+        </tbody>
+      </table>
 
-  <a class="btn btn-primary" href="admin_history_add.php" role="button">History Add</a>
+      <div class="row">
+        <div class="col-6">
+          <a href="admin_history_add.php?student_id=<?php echo $student_id; ?>" role="button" class="nw-btn primary-btn">Add History<span class="lnr lnr-arrow-right"></span></a>
+        </div>
 
-</div>
+        <div class="col-6">
+          <a href="admin_history_list_csv.php?student_id=<?php echo $student_id; ?>" role="button" class="nw-btn primary-btn">Excel Output<span class="lnr lnr-arrow-right"></span></a>
+        </div>
+      </div>
+
+    </div>
 
 <!--<?php print_r($teachers)  ?>-->
 
@@ -185,21 +204,9 @@ foreach ($teachers as $tid => $tname){
 
 <!-- jquery & iScroll -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-
-
-
-    <script src="js/drawer.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('.drawer').drawer();
-    });
-  </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 </body>
 

@@ -32,7 +32,7 @@ else {
 $mysqli->close();
 
 
-$url = '/printer_management/admin_history_list.php';
+$url = "/printer_management/admin_history_list.php?student_id=$student_id";
 header("Location: {$url}");
 exit;
 ?>
