@@ -91,7 +91,7 @@ if ($result = $mysqli->query($query)) {
   </header>
   <!-- End Header Area -->
 
-  <main role="main" style="padding-top: 90px;">
+  <main role="main" style="padding-top: 210px;">
     <!-- Page content -->
 
     <div class="container">

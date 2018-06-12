@@ -35,24 +35,40 @@ EOM;
   <header class="default-header">
     <div class="container">
       <div class="header-wrap">
-        <div class="header-top d-flex justify-content-between align-items-center">
+        <div class="header-top d-flex justify-content-between align-items-center" style="background-image: url(images/banner_nurse.png); width:1270px; height: 150px; ">
+<!--
           <div class="logo">
             <a href="."><img src="images/logo.png" alt=""></a>
           </div>
-          <div class="main-menubar d-flex align-items-center">
-            <nav>
+          <div class="main-menubar d-flex align-items-center pull-right" style="width: 900px">
+            <nav class="">
               <a href="admin_user_list.php" >Student</a>
               <a href="admin_history_list.php" >History</a>
               <a href="index.php" class="logout">Logout</a>
             </nav>
           </div>
+-->
+
+          <div class="container">
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-7">
+                <nav class="">
+                  <a href="admin_user_list.php" >Student</a>
+                  <a href="admin_history_list.php" >History</a>
+                  <a href="index.php" class="logout">Logout</a>
+                </nav>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </header>
   <!-- End Header Area -->
 
-  <main role="main" style="padding-top: 90px;">
+  <main role="main" style="padding-top: 210px;">
     <!-- Page content -->
 
     <div class="container">
@@ -77,8 +93,8 @@ EOM;
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>first_name</th>
-            <th>last_name</th>
+            <th>first name</th>
+            <th>last name</th>
             <th>class</th>
             <th>number</th>
             <th>sex</th>
@@ -145,8 +161,6 @@ if ($result = $mysqli->query($query)) {
       </div>
 
     </div>
-
-<?php echo $query; ?>
 
   </main>
 

@@ -1,8 +1,9 @@
 <?php
 include_once "lib/lib.php";
 
-$id            = $_GET['id'];
-$teacher_id    = $_GET['teacher_id'];
+$id             = $_GET['id'];
+$student_id     = $_GET['student_id'];
+$teacher_id     = $_GET['teacher_id'];
 
 #print $id;
 #exit;
@@ -89,7 +90,7 @@ else {
 $mysqli->close();
 
 
-$url = '/printer_management/admin_history_list.php';
+$url = "/printer_management/admin_history_list.php?student_id=$student_id";
 header("Location: {$url}");
 exit;
 ?>
